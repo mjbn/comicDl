@@ -5,8 +5,7 @@ from sys import argv, exit
 from PyQt5.QtWidgets import QApplication,QMainWindow,QWidget
 from PyQt5.QtWidgets import *
 from ui_comicdl import Ui_comicdl
-from wget import download
-
+from ui_setting import Ui_setting
 
 class comicdl(QMainWindow, Ui_comicdl):
     # Window Init
@@ -23,7 +22,11 @@ class comicdl(QMainWindow, Ui_comicdl):
         self.actionSetting.triggered.connect(self.opensetting)
         self.actionExit.triggered.connect(self.close)
 
-    def changeSites(self):
+    def opensetting(self):
+        self.s = self.setting()
+        self.s.show()
+
+    def changech(self):
         pass
 
     def startDl(self):
@@ -39,10 +42,6 @@ class comicdl(QMainWindow, Ui_comicdl):
             i+=1
         self.statusbar.showMessage(' ' + str(i*pecentPerSteps) +'% - Done')
 
-    def opensetting(self):
-        self.s = self.setting()
-        self.s.show()
-
     def getImgLinks(self):
         url = self.lineEdit.text()
         page = get(url)
@@ -54,19 +53,19 @@ class comicdl(QMainWindow, Ui_comicdl):
             img_links.append(img_tag['data-src'])
         return img_links
 
-    class setting(QMainWindow):
+    class setting(QMainWindow, Ui_setting):
         def __init__(self):
             super().__init__()
+            self.setupUi(self)
             self.setWindowTitle('Comic Dl - Setting')
+        
+        def changeSites(self):
+            pass
 
     
-
-
-
 
 if __name__=="__main__":
     pycalc = QApplication(argv)
     view = comicdl()
     view.show()
     exit(pycalc.exec_())
-
