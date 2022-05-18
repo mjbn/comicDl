@@ -14,6 +14,8 @@ class comicdl(QMainWindow, Ui_comicdl):
         super().__init__()
         # Setup Ui
         self.setupUi(self)
+        # Seting The Value of Progressbar
+        self.progressBar.setValue(0)
         # Window Title
         self.setWindowTitle('Comic DL')
         # Window Properties
@@ -24,11 +26,19 @@ class comicdl(QMainWindow, Ui_comicdl):
         status.showMessage("I'm the Status Bar")
         self.setStatusBar(status)
 
-    def selectionchange(self):
+    def changeSites(self):
         pass
 
-    def getImgLinks():
-        page = get("https://mangatx.com/manga/rebirth-of-the-urban-immortal-cultivator-manhua/chapter-1/")
+    def startDl(self):
+        img_links = self.getImgLinks()
+        steps = img_links.index() + 2
+
+    def progress(self):
+        self.progressBar.setValue(0)
+
+    def getImgLinks(self):
+        url = self.lineEdit.text()
+        page = get(url)
         soup = BeautifulSoup(page.content, "html.parser")
         results = soup.find("div", class_="reading-content")
         img_tag = results.find_all("img")
