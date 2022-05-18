@@ -62,6 +62,9 @@ class comicdl(QMainWindow, Ui_comicdl):
         def changeSites(self):
             pass
 
+        def savesetting(self):
+            self.close()
+
     
 
 if __name__=="__main__":
