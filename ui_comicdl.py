@@ -14,11 +14,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_comicdl(object):
     def setupUi(self, comicdl):
         comicdl.setObjectName("comicdl")
-        comicdl.resize(807, 600)
+        comicdl.resize(344, 340)
         self.centralwidget = QtWidgets.QWidget(comicdl)
         self.centralwidget.setObjectName("centralwidget")
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(-10, 0, 341, 291))
+        self.tabWidget.setGeometry(QtCore.QRect(0, 0, 341, 291))
         self.tabWidget.setObjectName("tabWidget")
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
@@ -54,7 +54,7 @@ class Ui_comicdl(object):
         self.tabWidget.addTab(self.tab_2, "")
         comicdl.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(comicdl)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 807, 25))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 344, 25))
         self.menubar.setObjectName("menubar")
         self.menuComic_DL = QtWidgets.QMenu(self.menubar)
         self.menuComic_DL.setObjectName("menuComic_DL")
@@ -75,7 +75,6 @@ class Ui_comicdl(object):
         self.lineEdit.returnPressed.connect(comicdl.startDl) # type: ignore
         self.pushButton.clicked.connect(comicdl.startDl) # type: ignore
         self.comboBox.currentIndexChanged['int'].connect(comicdl.changeSites) # type: ignore
-        self.progressBar.valueChanged['int'].connect(comicdl.progress) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(comicdl)
         comicdl.setTabOrder(self.comboBox, self.lineEdit)
         comicdl.setTabOrder(self.lineEdit, self.pushButton)

@@ -19,6 +19,9 @@ class comicdl(QMainWindow, Ui_comicdl):
         self.progressBar.setValue(0)
         # Window Title
         self.setWindowTitle('Comic DL')
+        # Menu Bar actions
+        self.actionSetting.triggered.connect(self.opensetting)
+        self.actionExit.triggered.connect(self.close)
 
     def changeSites(self):
         pass
@@ -36,8 +39,9 @@ class comicdl(QMainWindow, Ui_comicdl):
             i+=1
         self.statusbar.showMessage(' ' + str(i*pecentPerSteps) +'% - Done')
 
-    def progress(self,i):
-        pass
+    def opensetting(self):
+        self.s = self.setting()
+        self.s.show()
 
     def getImgLinks(self):
         url = self.lineEdit.text()
@@ -49,6 +53,11 @@ class comicdl(QMainWindow, Ui_comicdl):
         for img_tag in img_tags:
             img_links.append(img_tag['data-src'])
         return img_links
+
+    class setting(QMainWindow):
+        def __init__(self):
+            super().__init__()
+            self.setWindowTitle('Comic Dl - Setting')
 
     
 

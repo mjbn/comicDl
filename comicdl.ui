@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>807</width>
-    <height>600</height>
+    <width>344</width>
+    <height>340</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>-10</x>
+      <x>0</x>
       <y>0</y>
       <width>341</width>
       <height>291</height>
@@ -101,7 +101,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>807</width>
+     <width>344</width>
      <height>25</height>
     </rect>
    </property>
@@ -141,11 +141,11 @@
    <slot>startDl()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>109</x>
-     <y>118</y>
+     <x>159</x>
+     <y>186</y>
     </hint>
     <hint type="destinationlabel">
-     <x>414</x>
+     <x>342</x>
      <y>224</y>
     </hint>
    </hints>
@@ -157,11 +157,11 @@
    <slot>startDl()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>79</x>
-     <y>152</y>
+     <x>129</x>
+     <y>248</y>
     </hint>
     <hint type="destinationlabel">
-     <x>385</x>
+     <x>342</x>
      <y>191</y>
     </hint>
    </hints>
@@ -173,28 +173,12 @@
    <slot>changeSites()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>255</x>
-     <y>82</y>
+     <x>305</x>
+     <y>124</y>
     </hint>
     <hint type="destinationlabel">
-     <x>399</x>
+     <x>342</x>
      <y>82</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>progressBar</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>comicdl</receiver>
-   <slot>progress()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>140</x>
-     <y>301</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>366</x>
-     <y>354</y>
     </hint>
    </hints>
   </connection>
@@ -202,6 +186,5 @@
  <slots>
   <slot>startDl()</slot>
   <slot>changeSites()</slot>
-  <slot>progress()</slot>
  </slots>
 </ui>
