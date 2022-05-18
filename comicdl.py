@@ -23,12 +23,13 @@ class comicdl(QMainWindow):
         cb = QComboBox()
         cb.addItem("MangaTx")
         cb.currentIndexChanged.connect(self.selectionchange)
+        lable2 = QLabel("Link:")
         lineEdit1 = QLineEdit()
         button1 = QPushButton("Three")
         # Layout
         layout = QFormLayout(centrWidget)
         layout.addRow(lable1, cb)
-        layout.addRow(lineEdit1)
+        layout.addRow(lable2,lineEdit1)
         layout.addRow(button1)
         # Window Properties
         self.setCentralWidget(centrWidget)
