@@ -16,32 +16,9 @@ class comicdl(QMainWindow, Ui_comicdl):
         self.setupUi(self)
         # Window Title
         self.setWindowTitle('Comic DL')
-        # Central Widget
-        centrWidget = QWidget()
-        # Widget
-        lable1 = QLabel("Sites:")
-        cb = QComboBox()
-        cb.addItem("MangaTx")
-        cb.currentIndexChanged.connect(self.selectionchange)
-        lable2 = QLabel("Link:")
-        lineEdit1 = QLineEdit()
-        button1 = QPushButton("Download")
-        # Layout
-        layout = QFormLayout(centrWidget)
-        layout.addRow(lable1, cb)
-        layout.addRow(lable2,lineEdit1)
-        layout.addRow(button1)
         # Window Properties
-        self.setCentralWidget(centrWidget)
-        self._createMenu()
         self._createStatusBar()
-    
-    def _createMenu(self):
-        self.menu = self.menuBar().addMenu("&Comic DL")
-        self.menu.addAction('&Setting', self.close)
-        self.menu.addAction('&Exit', self.close)
 
-    
     def _createStatusBar(self):
         status = QStatusBar()
         status.showMessage("I'm the Status Bar")
