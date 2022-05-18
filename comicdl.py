@@ -25,7 +25,7 @@ class comicdl(QMainWindow):
         cb.currentIndexChanged.connect(self.selectionchange)
         lable2 = QLabel("Link:")
         lineEdit1 = QLineEdit()
-        button1 = QPushButton("Three")
+        button1 = QPushButton("Download")
         # Layout
         layout = QFormLayout(centrWidget)
         layout.addRow(lable1, cb)
