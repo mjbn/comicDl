@@ -2,18 +2,18 @@
 from bs4 import BeautifulSoup
 from requests import get
 from sys import argv, exit
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtWidgets import QMainWindow
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QApplication,QMainWindow,QWidget
 from PyQt5.QtWidgets import *
+from ui_comicdl import Ui_comicdl
 
 
-class comicdl(QMainWindow):
+class comicdl(QMainWindow, Ui_comicdl):
     # Window Init
     def __init__(self):
         # Parent Window Init
         super().__init__()
-
+        # Setup Ui
+        self.setupUi(self)
         # Window Title
         self.setWindowTitle('Comic DL')
         # Central Widget
