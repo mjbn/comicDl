@@ -1,15 +1,18 @@
 mainfile = comicdl.py
 binName = comicdl
 
-comicdl.c:
+.c:
 	cython --embed $(mainfile);
 
-compile: comicdl.c
+compile: .c
 	# gcc $(pkg-config --cflags python3) -o $(binName) $(binName).c -lpython3.10;
 	gcc -I/usr/include/python3.10 -o $(binName) $(binName).c -lpython3.10;
 
 install: compile
 	mv $(binName) ~/.local/bin/
+
+doc:
+	cp README.html README.md
 
 uninstall:
 	rm ~/.local/bin/$(binName)
