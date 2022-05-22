@@ -22,9 +22,10 @@ class comicdl(QMainWindow, Ui_comicdl):
         # Menu Bar actions
         self.actionSetting.triggered.connect(self.opensetting)
         self.actionExit.triggered.connect(self.close)
+        # Setting Page Init
+        self.s = self.setting()
 
     def opensetting(self):
-        self.s = self.setting()
         self.s.show()
 
 
@@ -39,6 +40,8 @@ class comicdl(QMainWindow, Ui_comicdl):
                 img_links = self.getLinks_mangatx(url)
             elif self.s.chsites == 1:
                 img_links = self.getLinks_1stkissmanga(url)
+            elif self.s.chsites == 2:
+                img_links = self.getLinks_readm(url)
             pecentPerImgSteps = int(100/(len(img_links) + 2))
             self.progressBar.setValue(pecentPerImgSteps)
             i = 1
@@ -65,13 +68,25 @@ class comicdl(QMainWindow, Ui_comicdl):
 
     def getLinks_1stkissmanga(self, url):
         page = get(url)
+        print(page.content)
         soup = BeautifulSoup(page.content, "html.parser")
-        results = soup.find("div", class_="reading-content")
-        img_tags = results.find_all("img", class_="wp-manga-chapter-img")
+        results = soup.find_all("img")
+        print(results)
+        img_tags = results
         print(img_tags)
         img_links = []
         for img_tag in img_tags:
             img_links.append(img_tag['src'])
+        return img_links
+
+    def getLinks_readm(self, url):
+        page = get(url)
+        soup = BeautifulSoup(page.content, "html.parser")
+        results = soup.find("div", class_="reading-content")
+        img_tags = results.find_all("img")
+        img_links = []
+        for img_tag in img_tags:
+            img_links.append(img_tag['data-src'])
         return img_links
 
     class setting(QMainWindow, Ui_setting):
@@ -79,6 +94,7 @@ class comicdl(QMainWindow, Ui_comicdl):
             super().__init__()
             self.setupUi(self)
             self.setWindowTitle('Comic Dl - Setting')
+            self.chsites = 0
         
         def changeSites(self, i):
             self.chsites = i

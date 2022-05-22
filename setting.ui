@@ -26,12 +26,17 @@
      <widget class="QComboBox" name="comboBox">
       <item>
        <property name="text">
-        <string>MangaTx</string>
+        <string>MangaTx.com</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>1stKissManga</string>
+        <string>1stKissManga.io</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Readm.org</string>
        </property>
       </item>
      </widget>
