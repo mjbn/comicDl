@@ -35,13 +35,12 @@ class comicdl(QMainWindow, Ui_comicdl):
         for ch in range(self.fromch.value(), self.toch.value()+1):
             pth = path.join('.',self.lineEdit_2.text(),str(ch))
             makedirs(pth)
-            url = self.lineEdit.text()+'chapter-'+str(ch)
             if self.s.chsites == 0:
-                img_links = self.getLinks_mangatx(url)
+                img_links = self.getLinks_mangatx(ch)
             elif self.s.chsites == 1:
-                img_links = self.getLinks_1stkissmanga(url)
+                img_links = self.getLinks_1stkissmanga(ch)
             elif self.s.chsites == 2:
-                img_links = self.getLinks_readm(url)
+                img_links = self.getLinks_readm(ch)
             pecentPerImgSteps = int(100/(len(img_links) + 2))
             self.progressBar.setValue(pecentPerImgSteps)
             i = 1
@@ -56,7 +55,8 @@ class comicdl(QMainWindow, Ui_comicdl):
             self.statusbar.showMessage(' ' + str(i*pecentPerImgSteps) +'% - '+str(ch)+'/'+str(percentPerChSteps))
             self.progressBar.setValue(i*pecentPerImgSteps)
 
-    def getLinks_mangatx(self, url):
+    def getLinks_mangatx(self, ch):
+        url = self.lineEdit.text()+'chapter-'+str(ch)
         page = get(url)
         soup = BeautifulSoup(page.content, "html.parser")
         results = soup.find("div", class_="reading-content")
@@ -66,27 +66,30 @@ class comicdl(QMainWindow, Ui_comicdl):
             img_links.append(img_tag['data-src'])
         return img_links
 
-    def getLinks_1stkissmanga(self, url):
-        page = get(url)
-        print(page.content)
-        soup = BeautifulSoup(page.content, "html.parser")
-        results = soup.find_all("img")
-        print(results)
-        img_tags = results
-        print(img_tags)
-        img_links = []
-        for img_tag in img_tags:
-            img_links.append(img_tag['src'])
-        return img_links
+    def getLinks_1stkissmanga(self, ch):
+        # url = self.lineEdit.text()+'chapter-'+str(ch)
+        # page = get(url)
+        # print(page.content)
+        # soup = BeautifulSoup(page.content, "html.parser")
+        # results = soup.find_all("img")
+        # print(results)
+        # img_tags = results
+        # print(img_tags)
+        # img_links = []
+        # for img_tag in img_tags:
+        #     img_links.append(img_tag['src'])
+        # return img_links
+        exit("Error: Cloudflare cookie error")
 
-    def getLinks_readm(self, url):
+    def getLinks_readm(self, ch):
+        url = self.lineEdit.text()+str(ch)+'/all-pages'
         page = get(url)
         soup = BeautifulSoup(page.content, "html.parser")
-        results = soup.find("div", class_="reading-content")
+        results = soup.find("div", class_="ch-images ch-image-container")
         img_tags = results.find_all("img")
         img_links = []
         for img_tag in img_tags:
-            img_links.append(img_tag['data-src'])
+            img_links.append('https://readm.org'+img_tag['src'])
         return img_links
 
     class setting(QMainWindow, Ui_setting):
