@@ -32,6 +32,7 @@ class Ui_setting(object):
         self.comboBox = QtWidgets.QComboBox(self.formLayoutWidget)
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("")
+        self.comboBox.addItem("")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.comboBox)
         setting.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(setting)
@@ -54,3 +55,4 @@ class Ui_setting(object):
         self.pushButton.setText(_translate("setting", "Ok"))
         self.label.setText(_translate("setting", "Sites:"))
         self.comboBox.setItemText(0, _translate("setting", "MangaTx"))
+        self.comboBox.setItemText(1, _translate("setting", "1stKissManga"))

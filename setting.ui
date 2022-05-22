@@ -51,6 +51,11 @@
          <string>MangaTx</string>
         </property>
        </item>
+       <item>
+        <property name="text">
+         <string>1stKissManga</string>
+        </property>
+       </item>
       </widget>
      </item>
     </layout>
