@@ -28,12 +28,9 @@ class comicdl(QMainWindow, Ui_comicdl):
     def opensetting(self):
         self.s.show()
 
-
     def startDl(self):
-        percentPerChSteps = int(100/(self.toch.value() - self.fromch.value()))
-
-        for ch in range(self.fromch.value(), self.toch.value()+1):
-            pth = path.join('.',self.lineEdit_2.text(),str(ch))
+        for ch in range(int(self.fromch.text()), int(self.toch.text())+1):
+            pth = path.join('.','comics',self.lineEdit_2.text(),str(ch))
             makedirs(pth)
             if self.s.chsites == 0:
                 img_links = self.getLinks_mangatx(ch)
@@ -44,16 +41,19 @@ class comicdl(QMainWindow, Ui_comicdl):
             pecentPerImgSteps = int(100/(len(img_links) + 2))
             self.progressBar.setValue(pecentPerImgSteps)
             i = 1
-            self.statusbar.showMessage(' ' + str(pecentPerImgSteps) +'% - '+str(ch)+'/'+str(percentPerChSteps))
+            self.statusbar.showMessage(' ' + str(pecentPerImgSteps) +'% - '+str(ch)+'/'+self.toch.text())
             for link in img_links:
                 file = open(path.join(pth,str(i)+'.jpg'), 'wb')
                 file.write(get(link).content)
                 file.close()
-                self.statusbar.showMessage(' ' + str(i*pecentPerImgSteps) +'% - '+str(ch)+'/'+str(percentPerChSteps))
+                self.statusbar.showMessage(' ' + str(i*pecentPerImgSteps) +'% - '+str(ch)+'/'+self.toch.text())
                 self.progressBar.setValue(i*pecentPerImgSteps)
                 i+=1
-            self.statusbar.showMessage(' ' + str(i*pecentPerImgSteps) +'% - '+str(ch)+'/'+str(percentPerChSteps))
+            self.statusbar.showMessage(' ' + str(i*pecentPerImgSteps) +'% - '+str(ch)+'/'+self.toch.text())
             self.progressBar.setValue(i*pecentPerImgSteps)
+        
+        self.statusbar.showMessage('Done')
+        self.progressBar.setValue(100)
 
     def getLinks_mangatx(self, ch):
         url = self.lineEdit.text()+'chapter-'+str(ch)

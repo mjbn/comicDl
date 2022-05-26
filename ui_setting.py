@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file './setting.ui'
+# Form implementation generated from reading ui file './ui/setting.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -14,26 +14,36 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_setting(object):
     def setupUi(self, setting):
         setting.setObjectName("setting")
-        setting.resize(335, 126)
+        setting.resize(367, 160)
         self.centralwidget = QtWidgets.QWidget(setting)
         self.centralwidget.setObjectName("centralwidget")
-        self.formLayout_2 = QtWidgets.QFormLayout(self.centralwidget)
-        self.formLayout_2.setObjectName("formLayout_2")
-        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 343, 90))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.formLayout = QtWidgets.QFormLayout(self.scrollAreaWidgetContents)
+        self.formLayout.setObjectName("formLayout")
+        self.label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
         self.label.setObjectName("label")
-        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label)
-        self.comboBox = QtWidgets.QComboBox(self.centralwidget)
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label)
+        self.comboBox = QtWidgets.QComboBox(self.scrollAreaWidgetContents)
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
-        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.comboBox)
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.comboBox)
+        self.pushButton = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
         self.pushButton.setObjectName("pushButton")
-        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.pushButton)
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.pushButton)
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.verticalLayout.addWidget(self.scrollArea)
         setting.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(setting)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 335, 25))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 367, 25))
         self.menubar.setObjectName("menubar")
         setting.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(setting)
