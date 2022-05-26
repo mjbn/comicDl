@@ -1,5 +1,5 @@
 #!/bin/python3
-from bs4 import BeautifulSoup
+from shiraziSalad import shiraziSalad
 from requests import get
 from sys import argv, exit
 from os import makedirs,mkdir,path
@@ -58,9 +58,8 @@ class comicdl(QMainWindow, Ui_comicdl):
     def getLinks_mangatx(self, ch):
         url = self.lineEdit.text()+'chapter-'+str(ch)
         page = get(url)
-        soup = BeautifulSoup(page.content, "html.parser")
-        results = soup.find("div", class_="reading-content")
-        img_tags = results.find_all("img")
+        salad = shiraziSalad(page.content)
+        img_tags = salad.getElementByTag(html, None)
         img_links = []
         for img_tag in img_tags:
             img_links.append(img_tag['data-src'])
@@ -70,10 +69,8 @@ class comicdl(QMainWindow, Ui_comicdl):
         # url = self.lineEdit.text()+'chapter-'+str(ch)
         # page = get(url)
         # print(page.content)
-        # soup = BeautifulSoup(page.content, "html.parser")
-        # results = soup.find_all("img")
-        # print(results)
-        # img_tags = results
+        # salad = shiraziSalad(page.content)
+        # img_tags = salad.getElementByTag('img', None)
         # print(img_tags)
         # img_links = []
         # for img_tag in img_tags:
@@ -84,9 +81,8 @@ class comicdl(QMainWindow, Ui_comicdl):
     def getLinks_readm(self, ch):
         url = self.lineEdit.text()+str(ch)+'/all-pages'
         page = get(url)
-        soup = BeautifulSoup(page.content, "html.parser")
-        results = soup.find("div", class_="ch-images ch-image-container")
-        img_tags = results.find_all("img")
+        salad = shiraziSalad(page.content)
+        img_tags = salad.getElementByTag('img', None)
         img_links = []
         for img_tag in img_tags:
             img_links.append('https://readm.org'+img_tag['src'])
