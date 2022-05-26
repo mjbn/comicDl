@@ -4,8 +4,9 @@ class shiraziSalad(HTMLParser):
     starttags = {}
     tag = None
 
-    def __init__(self, html):
+    def __init__(self, html, data=None):
         super().__init__()
+        self.data = data
         self.feed(html)
     
     def handle_starttag(self, tag, attrs):
@@ -13,14 +14,15 @@ class shiraziSalad(HTMLParser):
         atrTmp = {}
         atrTmp['tag'] = tag
         for atr in attrs:
-            tagTmp += ' '+atr[0]+'=\"'+atr[1]+'\"'
+            tagTmp += ' '+str(atr[0])+'=\"'+str(atr[1])+'\"'
             atrTmp[atr[0]] = atr[1]
         tagTmp += '>'
         self.tag = tagTmp
         self.starttags[tagTmp] = atrTmp
 
     def handle_data(self, data):
-        self.starttags[self.tag]['value'] = data
+        if self.data != None or self.data == True:
+            self.starttags[self.tag]['value'] = data
 
     def getElementById(self, _id, htmlArray=None):
         op = {}
@@ -31,7 +33,7 @@ class shiraziSalad(HTMLParser):
                 op[tag] = htmlArray[tag]
         return op
 
-    def getElementByClass(self, _class, htmlArray):
+    def getElementByClass(self, _class, htmlArray=None):
         op = {}
         if htmlArray == None:
             htmlArray = self.starttags
@@ -40,7 +42,7 @@ class shiraziSalad(HTMLParser):
                 op[tag] = htmlArray[tag]
         return op
 
-    def getElementByTag(self, _tag, htmlArray):
+    def getElementByTag(self, _tag, htmlArray=None):
         op = {}
         if htmlArray == None:
             htmlArray = self.starttags

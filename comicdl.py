@@ -56,14 +56,15 @@ class comicdl(QMainWindow, Ui_comicdl):
         self.progressBar.setValue(100)
 
     def getLinks_mangatx(self, ch):
-        url = self.lineEdit.text()+'chapter-'+str(ch)
-        page = get(url)
-        salad = shiraziSalad(page.content)
-        img_tags = salad.getElementByTag(html, None)
-        img_links = []
-        for img_tag in img_tags:
-            img_links.append(img_tag['data-src'])
-        return img_links
+        # url = self.lineEdit.text()+'chapter-'+str(ch)
+        # page = get(url)
+        # salad = shiraziSalad(str(page.content))
+        # img_tags = salad.getElementByTag('img', None)
+        # img_links = []
+        # for img_tag in img_tags:
+        #     img_links.append(img_tag['data-src'])
+        # return img_links
+        exit("Error: Cloudflare")
 
     def getLinks_1stkissmanga(self, ch):
         # url = self.lineEdit.text()+'chapter-'+str(ch)
@@ -81,11 +82,11 @@ class comicdl(QMainWindow, Ui_comicdl):
     def getLinks_readm(self, ch):
         url = self.lineEdit.text()+str(ch)+'/all-pages'
         page = get(url)
-        salad = shiraziSalad(page.content)
+        salad = shiraziSalad(str(page.content))
         img_tags = salad.getElementByTag('img', None)
         img_links = []
         for img_tag in img_tags:
-            img_links.append('https://readm.org'+img_tag['src'])
+            img_links.append('https://readm.org'+img_tags[img_tag]['src'])
         return img_links
 
     class setting(QMainWindow, Ui_setting):
