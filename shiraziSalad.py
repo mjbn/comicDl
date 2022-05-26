@@ -3,7 +3,6 @@ from html.parser import HTMLParser
 class shiraziSalad(HTMLParser):
     starttags = {}
     tag = None
-    html = None
 
     def __init__(self, html):
         super().__init__()
@@ -23,33 +22,35 @@ class shiraziSalad(HTMLParser):
     def handle_data(self, data):
         self.starttags[self.tag]['value'] = data
 
-    def find(self, ftag):
-        self.ftag = ftag
-
-    def getElementById(self, _id):
+    def getElementById(self, _id, htmlArray=None):
         op = {}
-        for tag in self.starttags:
-            if tag['id'] == _id:
-                op[tag] = tag
-        return op
-    def getElementByClass(self, _class):
-        op = {}
-        for tag in self.starttags:
-            if tag['class'] == _class:
-                op[tag] = tag
+        if htmlArray == None:
+            htmlArray = self.starttags
+        for tag in htmlArray:
+            if htmlArray[tag]['id'] == _id:
+                op[tag] = htmlArray[tag]
         return op
 
-    def getElementByTag(self, _tag):
+    def getElementByClass(self, _class, htmlArray):
         op = {}
-        for tag in self.starttags:
-            if tag['tag'] == _tag:
-                op[tag] = tag
+        if htmlArray == None:
+            htmlArray = self.starttags
+        for tag in htmlArray:
+            if htmlArray[tag]['class'] == _class:
+                op[tag] = htmlArray[tag]
+        return op
+
+    def getElementByTag(self, _tag, htmlArray):
+        op = {}
+        if htmlArray == None:
+            htmlArray = self.starttags
+        for tag in htmlArray:
+            if htmlArray[tag]['tag'] == _tag:
+                op[tag] = htmlArray[tag]
         return op
 
 if __name__=="__main__":
-    salad = shiraziSalad("<html><body><h1 style='mj' src='s'>hello shiraz</h1><img src='s'></body></html>")
-    salad.find('img')
-    print(salad.starttags)
+    pass
 
         
 
