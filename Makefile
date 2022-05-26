@@ -18,4 +18,4 @@ uninstall:
 	rm ~/.local/bin/$(binName)
 
 clean:
-	rm $(binName).c $(binName) $(binName).exe
+	rm $(binName).c $(binName) $(binName).exe $(binName).def
