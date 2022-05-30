@@ -1,10 +1,10 @@
 #!/bin/python3
-from shiraziSalad import shiraziSalad
-from requests import get
 from sys import argv, exit
 from os import makedirs,mkdir,path
 from PyQt5.QtWidgets import QApplication,QMainWindow,QWidget
 from PyQt5.QtWidgets import *
+from urllib.request import urlopen, urlretrieve
+from shiraziSalad import shiraziSalad
 from ui_comicdl import Ui_comicdl
 from ui_setting import Ui_setting
 
@@ -43,9 +43,7 @@ class comicdl(QMainWindow, Ui_comicdl):
             i = 1
             self.statusbar.showMessage(' ' + str(pecentPerImgSteps) +'% - '+str(ch)+'/'+self.toch.text())
             for link in img_links:
-                file = open(path.join(pth,str(i)+'.jpg'), 'wb')
-                file.write(get(link).content)
-                file.close()
+                urlretrieve(link, path.join(pth,str(i)+'.jpg'))
                 self.statusbar.showMessage(' ' + str(i*pecentPerImgSteps) +'% - '+str(ch)+'/'+self.toch.text())
                 self.progressBar.setValue(i*pecentPerImgSteps)
                 i+=1
@@ -57,8 +55,8 @@ class comicdl(QMainWindow, Ui_comicdl):
 
     def getLinks_mangatx(self, ch):
         # url = self.lineEdit.text()+'chapter-'+str(ch)
-        # page = get(url)
-        # salad = shiraziSalad(str(page.content))
+        # page = urlopen(url)
+        # salad = shiraziSalad(page.read().decode('utf8'))
         # img_tags = salad.getElementByTag('img', None)
         # img_links = []
         # for img_tag in img_tags:
@@ -69,8 +67,8 @@ class comicdl(QMainWindow, Ui_comicdl):
     def getLinks_1stkissmanga(self, ch):
         # url = self.lineEdit.text()+'chapter-'+str(ch)
         # page = get(url)
-        # print(page.content)
-        # salad = shiraziSalad(page.content)
+        # page = urlopen(url)
+        # salad = shiraziSalad(page.read().decode('utf8'))
         # img_tags = salad.getElementByTag('img', None)
         # print(img_tags)
         # img_links = []
@@ -81,9 +79,10 @@ class comicdl(QMainWindow, Ui_comicdl):
 
     def getLinks_readm(self, ch):
         url = self.lineEdit.text()+str(ch)+'/all-pages'
-        page = get(url)
-        salad = shiraziSalad(str(page.content))
+        page = urlopen(url)
+        salad = shiraziSalad(page.read().decode('utf8'))
         img_tags = salad.getElementByTag('img', None)
+        salad.close()
         img_links = []
         for img_tag in img_tags:
             img_links.append('https://readm.org'+img_tags[img_tag]['src'])
